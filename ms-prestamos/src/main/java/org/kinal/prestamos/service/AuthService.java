@@ -1,12 +1,12 @@
-package org.kinal.libros.service;
+package org.kinal.prestamos.service;
 
 import lombok.RequiredArgsConstructor;
-import org.kinal.libros.dto.AuthResponse;
-import org.kinal.libros.dto.LoginRequest;
-import org.kinal.libros.entity.Usuario;
-import org.kinal.libros.exception.ResourceNotFoundException;
-import org.kinal.libros.repository.UsuarioRepository;
-import org.kinal.libros.security.JwtService;
+import org.kinal.prestamos.dto.AuthResponse;
+import org.kinal.prestamos.dto.LoginRequest;
+import org.kinal.prestamos.entity.Usuario;
+import org.kinal.prestamos.exception.ResourceNotFoundException;
+import org.kinal.prestamos.repository.UsuarioRepository;
+import org.kinal.prestamos.security.JwtService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.stereotype.Service;

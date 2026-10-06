@@ -1,10 +1,10 @@
-package org.kinal.libros.controller;
+package org.kinal.prestamos.controller;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.kinal.libros.dto.AuthResponse;
-import org.kinal.libros.dto.LoginRequest;
-import org.kinal.libros.service.AuthService;
+import org.kinal.prestamos.dto.AuthResponse;
+import org.kinal.prestamos.dto.LoginRequest;
+import org.kinal.prestamos.service.AuthService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
