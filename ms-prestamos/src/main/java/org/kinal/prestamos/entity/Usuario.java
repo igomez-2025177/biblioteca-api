@@ -4,9 +4,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -14,6 +16,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "usuarios")
@@ -32,7 +36,6 @@ public class Usuario {
     @Column(nullable = false, unique = true, length = 120)
     private String email;
 
-    // siempre guardada con BCrypt
     @Column(nullable = false, length = 100)
     private String password;
 
@@ -46,6 +49,10 @@ public class Usuario {
 
     @Column(name = "fecha_registro", nullable = false, updatable = false)
     private LocalDateTime fechaRegistro;
+
+    // un usuario tiene muchos prestamos (LAZY para no cargarlos si no se piden)
+    @OneToMany(mappedBy = "usuario", fetch = FetchType.LAZY)
+    private List<Prestamo> prestamos = new ArrayList<>();
 
     @PrePersist
     void antesDeGuardar() {

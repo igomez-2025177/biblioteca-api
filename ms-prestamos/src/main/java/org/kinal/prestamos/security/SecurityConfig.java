@@ -43,10 +43,10 @@ public class SecurityConfig {
                         .accessDeniedHandler(new RestAccessDeniedHandler()))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/auth/**", "/error").permitAll()
-                        // cualquier usuario logueado puede consultar el catalogo
-                        .requestMatchers(HttpMethod.GET, "/api/v1/libros/**").authenticated()
-                        // crear, editar y eliminar solo ADMIN
-                        .requestMatchers("/api/v1/libros/**").hasRole("ADMIN")
+                        // el historial propio solo lo ve el LECTOR
+                        .requestMatchers(HttpMethod.GET, "/api/v1/prestamos/mis-prestamos").hasRole("LECTOR")
+                        // todo lo demas de prestamos: BIBLIOTECARIO o ADMIN
+                        .requestMatchers("/api/v1/prestamos/**").hasAnyRole("BIBLIOTECARIO", "ADMIN")
                         .anyRequest().authenticated())
                 .addFilterBefore(new JwtAuthenticationFilter(jwtService), UsernamePasswordAuthenticationFilter.class);
 
