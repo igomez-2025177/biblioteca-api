@@ -1,5 +1,6 @@
 package org.kinal.usuarios;
 
+import org.kinal.usuarios.config.CrearBaseDeDatos;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -7,6 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class UsuariosApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(UsuariosApplication.class, args);
+        SpringApplication app = new SpringApplication(UsuariosApplication.class);
+        app.addListeners(new CrearBaseDeDatos());
+        app.run(args);
     }
 }
