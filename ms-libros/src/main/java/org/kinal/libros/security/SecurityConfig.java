@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.kinal.libros.repository.UsuarioRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.ProviderManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -42,8 +43,10 @@ public class SecurityConfig {
                         .accessDeniedHandler(new RestAccessDeniedHandler()))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/auth/**", "/error").permitAll()
-                        .requestMatchers("/api/v1/usuarios/me").authenticated()
-                        .requestMatchers("/api/v1/usuarios/**").hasRole("ADMIN")
+                        // cualquier usuario logueado puede consultar el catalogo
+                        .requestMatchers(HttpMethod.GET, "/api/v1/libros/**").authenticated()
+                        // crear, editar y eliminar solo ADMIN
+                        .requestMatchers("/api/v1/libros/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .addFilterBefore(new JwtAuthenticationFilter(jwtService), UsernamePasswordAuthenticationFilter.class);
 
