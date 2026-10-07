@@ -1,4 +1,5 @@
 package org.kinal.libros.dto;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -6,6 +7,8 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+// campos de mas (como stockDisponible) se ignoran: el disponible lo calcula el sistema
+@JsonIgnoreProperties(ignoreUnknown = true)
 public record LibroRequest(
         @NotBlank(message = "El ISBN es obligatorio")
         @Size(max = 20, message = "El ISBN no puede pasar de 20 caracteres")

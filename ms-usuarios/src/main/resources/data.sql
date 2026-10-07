@@ -87,3 +87,7 @@
         SELECT COUNT(*) FROM prestamos p
         WHERE p.libro_id = l.id AND p.estado IN ('ACTIVO', 'ATRASADO')
     );
+-- contrasenas de la evaluacion: Admin123*, Biblio123*, Lector123*
+UPDATE usuarios SET password = '$2a$10$hOtNIzarWuoC6.p5PJ8fkulLl8uF8xqYYySQhNHYf9b46lbVCpKFe' WHERE email = 'admin@biblioteca.com';
+UPDATE usuarios SET password = '$2a$10$K4fviyGMCGfPbXYVNUZGDOvvoNynVyDXbguTB45yrsgJNEDklIcSC' WHERE email = 'bibliotecario@biblioteca.com';
+UPDATE usuarios SET password = '$2a$10$XzypMo0.gzsf8KWVSQQJkOHCr2RAnxkurryRMAnzLWxMxKOOu/uTm' WHERE email LIKE 'lector%@biblioteca.com';
